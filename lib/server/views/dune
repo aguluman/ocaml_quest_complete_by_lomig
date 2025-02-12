@@ -1,0 +1,4 @@
+(library
+ (name views)
+ (public_name quest_complete.views)
+ (libraries templates))

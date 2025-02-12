@@ -1,0 +1,4 @@
+(library
+ (name server)
+ (public_name quest_complete.server)
+ (libraries dream handlers))

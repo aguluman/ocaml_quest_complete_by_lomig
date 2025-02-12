@@ -1,0 +1,8 @@
+(lang dune 3.17)
+
+(context
+ (default
+  (paths
+   (PATH
+    "C:\\Users\\chukw\\AppData\\Local\\opam\\.cygwin\\root\\bin"
+    (:standard \ "C:\\WINDOWS\\system32")))))

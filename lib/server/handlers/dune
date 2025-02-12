@@ -1,0 +1,4 @@
+(library
+ (name handlers)
+ (public_name quest_complete.handlers)
+ (libraries dream views))

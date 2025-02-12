@@ -1,0 +1,50 @@
+(executable
+ (public_name quest_complete)
+ (name main)
+ (libraries dream quest_complete.server))
+
+(executable
+ (public_name tailwind_download)
+ (name tailwind_download)
+ (libraries 
+ cohttp 
+ cohttp-lwt-unix   
+ cohttp-lwt
+ lwt   
+ lwt.unix
+ extunix uri))
+
+
+;------------------------------------------------------------------------------
+; Reality Tailwind CSS
+;------------------------------------------------------------------------------
+
+(rule
+ (target tailwindcss)
+ (action
+  (progn
+   (run echo "Downloading Tailwind CSS...")
+   (run reality_tailwindcss download %{project_root}/bin)
+   (run chmod +x %{target})))
+ (mode fallback))
+
+(rule
+ (target application.css)
+ (deps
+  (:tailwindcss %{project_root}/bin/tailwindcss)
+  (:input %{project_root}/lib/client/stylesheets/application.css)
+  (source_tree %{project_root}/lib/client/stylesheets)
+  (source_tree %{project_root}/lib/server/templates))
+ (action
+  (chdir
+   %{project_root}/lib
+   (progn
+    (run echo "Building CSS...")
+    (ignore-outputs
+     (run
+      %{tailwindcss}
+      -i
+      %{input}
+      -o
+      %{project_root}/../../static/application.css))
+    (run cp %{project_root}/../../static/application.css %{target})))))
