@@ -14,7 +14,12 @@ sudo systemctl status postgresql
 ```bash
 sudo systemctl start postgresql
 ```
+- Create a .env file in the root directory of your project with the following content:
+```env
+DATABASE_URL=postgresql://postgres:password@localhost:5432/database_name
 
+PORT=XxXx
+```
 ### Create the application database:
 ```bash
 sudo -u postgres createdb quest_complete
