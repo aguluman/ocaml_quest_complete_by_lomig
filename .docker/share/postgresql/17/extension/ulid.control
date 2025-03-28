@@ -1,5 +1,0 @@
-comment = 'ulid type and methods'
-default_version = '0.2.0'
-module_pathname = '$libdir/pgx_ulid'
-relocatable = false
-superuser = true
