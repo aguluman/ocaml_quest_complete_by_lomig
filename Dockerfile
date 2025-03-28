@@ -9,6 +9,7 @@ USER root
 RUN chmod -R 755 /usr/lib/postgresql/ /usr/share/postgresql/
 RUN find /usr/lib/postgresql/ /usr/share/postgresql/ -type f -exec chmod 644 {} \;
 RUN find /usr/lib/postgresql/ /usr/share/postgresql/ -type d -exec chmod 755 {} \;
+RUN chown -R postgres:postgres /usr/lib/postgresql/ /usr/share/postgresql/
 USER postgres
 
 # Run PostgreSQL
