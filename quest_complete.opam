@@ -7,13 +7,18 @@ maintainer: ["aguluman <chukwumaakunyili@gmail.com>"]
 authors: ["aguluman <chukwumaakunyili@gmail.com>"]
 license: "MIT"
 tags: ["website" "games" "completion"]
-homepage: "https://github.com/aguluman/quest_complete"
-bug-reports: "https://github.com/aguluman/quest_complete/issues"
+homepage: "https://github.com/aguluman/ocaml_quest_complete_by_loomig"
+bug-reports: "https://github.com/aguluman/ocaml_quest_complete_by_loomig/issues"
 depends: [
   "dune" {>= "3.17"}
   "ocaml"
   "containers"
   "dream"
+  "caqti-driver-postgresql"
+  "pure-html"
+  "reality_assets"
+  "reality_tailwindcss"
+  "simple_dotenv"
   "odoc" {with-doc}
 ]
 build: [
@@ -30,4 +35,9 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/aguluman/quest_complete.git"
+dev-repo: "git+https://github.com/Lomig/quest_complete.git"
+pin-depends: [
+  [ "reality_tailwindcss.1.0.0" "git+https://github.com/Lomig/reality_tailwindcss.git#main" ]
+  [ "reality_assets.1.0.0" "git+https://github.com/Lomig/reality_assets.git#main" ]
+  [ "simple_dotenv.1.0.0" "git+https://github.com/Lomig/simple_dotenv.git#main" ]
+]

@@ -1,4 +1,3 @@
 (library
  (name server)
- (public_name quest_complete.server)
- (libraries dream handlers))
+ (libraries dream handlers reality_assets))

@@ -28,3 +28,25 @@ _opam/
 # System specific
 .DS_Store
 Thumbs.db
+
+# Environment/configuration files
+.env
+*.env
+.env.local
+.env.*
+!.env.example
+
+# Node modules (if using any JavaScript tools)
+node_modules/
+
+# Log files
+*.log
+
+# Database files
+*.db
+*.sqlite
+
+# Generated files
+static/*
+
+docker-compose.yml

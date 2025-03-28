@@ -1,5 +1,0 @@
-(library
- (name templates)
- (public_name quest_complete.templates)
- (libraries dream))
-(include_subdirs qualified)
