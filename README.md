@@ -1,195 +1,10 @@
-After installing postgresql, we need to create a database and import these tables on it
+# Quest Complete Database Setup Guide
 
-
-Use this sql script to create a game table.
-
-```pgsql
-sudo -u postgres psql -d quest_complete -c "
-CREATE TABLE IF NOT EXISTS games (
-  id TEXT PRIMARY KEY,
-  title TEXT NOT NULL,
-  platform TEXT NOT NULL,
-  genre TEXT NOT NULL,
-  release_date TEXT NOT NULL,
-  igdb_id INTEGER NOT NULL,
-  cover_url TEXT NOT NULL,
-  completion_date TEXT NOT NULL,
-  rating INTEGER,
-  review TEXT,
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL,
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL
-);"
-```
-
-
-
-Now we now imprt these sample data into the database.
-
-```
-sudo -u postgres psql -d quest_complete -c "
-INSERT INTO games (
-  id, title, platform, genre, release_date, igdb_id, 
-  cover_url, completion_date, rating, review, created_at, updated_at
-) VALUES (
-  'game-1', 
-  'The Legend of Zelda: Breath of the Wild', 
-  'Switch', 
-  'Action Adventure', 
-  '2017-03-03', 
-  7346, 
-  'https://images.igdb.com/igdb/image/upload/t_cover_big/co3p2d.jpg', 
-  '2023-09-15', 
-  95, 
-  'Un des meilleurs jeux de tous les temps!', 
-  NOW(), 
-  NOW()
-), (
-  'game-2', 
-  'Elden Ring', 
-  'PS5', 
-  'Action RPG', 
-  '2022-02-25', 
-  119133, 
-  'https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.jpg', 
-  '2023-12-10', 
-  90, 
-  'Un monde ouvert fascinant et un défi constant', 
-  NOW(), 
-  NOW()
-), (
-  'game-3', 
-  'Hades', 
-  'PC', 
-  'Roguelike', 
-  '2020-09-17', 
-  89996, 
-  'https://images.igdb.com/igdb/image/upload/t_cover_big/co2g63.jpg', 
-  '2024-01-05', 
-  NULL, 
-  NULL, 
-  NOW(), 
-  NOW()
-);"
-```
-
-
-Delete elden ring, add 3 more game using the existing convention.
-
-```pgsql
-sudo -u postgres psql -d quest_complete -c "
-DELETE FROM games WHERE id IN ('game-2', 'game-3');
-
-INSERT INTO games (
-  id, title, platform, genre, release_date, igdb_id, 
-  cover_url, completion_date, rating, review, created_at, updated_at
-) VALUES (
-  'game-2', 
-  'Uncharted 4: A Thief''s End', 
-  'PS4', 
-  'Action Adventure', 
-  '2016-05-10', 
-  7331, 
-  'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7h.jpg', 
-  '2022-08-15', 
-  93, 
-  'Une aventure cinématographique exceptionnelle avec des séquences d''action incroyables', 
-  NOW(), 
-  NOW()
-), (
-  'game-4', 
-  'Red Dead Redemption 2', 
-  'PS4', 
-  'Action Adventure', 
-  '2018-10-26', 
-  25076, 
-  'https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg', 
-  '2023-02-20', 
-  95, 
-  'Un chef-d''œuvre du monde ouvert avec une histoire captivante', 
-  NOW(), 
-  NOW()
-), (
-  'game-5', 
-  'God of War', 
-  'PS4', 
-  'Action Adventure', 
-  '2018-04-20', 
-  19560, 
-  'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg', 
-  '2023-06-10', 
-  94, 
-  'Une réinvention parfaite de la franchise avec un lien père-fils émouvant', 
-  NOW(), 
-  NOW()
-);"
-
-
-sudo -u postgres psql -d quest_complete -c "
--- Delete only game-2 (Elden Ring)
-DELETE FROM games WHERE id = 'game-2';
-
--- Insert new games
-INSERT INTO games (
-  id, title, platform, genre, release_date, igdb_id, 
-  cover_url, completion_date, rating, review, created_at, updated_at
-) 
-VALUES 
-  -- Uncharted 4 (replacing game-2)
-  (
-    'game-2',
-    'Uncharted 4: A Thief''s End',
-    'PS4',
-    'Action Adventure',
-    '2016-05-10',
-    7331,
-    'https://images.igdb.com/igdb/image/upload/t_cover_big/co1r7h.jpg',
-    '2022-08-15',
-    93,
-    'Une aventure cinématographique exceptionnelle avec des séquences d''action incroyables',
-    NOW(),
-    NOW()
-  ),
-  
-  -- Red Dead Redemption 2 (new game-4)
-  (
-    'game-4',
-    'Red Dead Redemption 2',
-    'PS4',
-    'Action Adventure',
-    '2018-10-26',
-    25076,
-    'https://images.igdb.com/igdb/image/upload/t_cover_big/co1q1f.jpg',
-    '2023-02-20',
-    95,
-    'Un chef-d''œuvre du monde ouvert avec une histoire captivante',
-    NOW(),
-    NOW()
-  ),
-  
-  -- God of War (new game-5)
-  (
-    'game-5',
-    'God of War',
-    'PS4',
-    'Action Adventure',
-    '2018-04-20',
-    19560,
-    'https://images.igdb.com/igdb/image/upload/t_cover_big/co1tmu.jpg',
-    '2023-06-10',
-    94,
-    'Une réinvention parfaite de la franchise avec un lien père-fils émouvant',
-    NOW(),
-    NOW()
-  );
-"
-
-#Quest Complete Database Setup Guide
-
-##Prerequisites
+## Prerequisites
 - PostgreSQL installed and running on your system
 - Command line access to run PostgreSQL commands
 
-##Initial Setup
+## Initial Setup
 - First, ensure PostgreSQL is installed on your system. You can check if it's running with:
 ```bash
 sudo systemctl status postgresql
@@ -200,12 +15,12 @@ sudo systemctl status postgresql
 sudo systemctl start postgresql
 ```
 
-###Create the application database:
+### Create the application database:
 ```bash
 sudo -u postgres createdb quest_complete
 ```
 
-###Database Schema
+### Database Schema
 - The application uses a games table to track completed games. Create the table using:
 ```bash
 sudo -u postgres psql -d quest_complete -c "
@@ -225,7 +40,7 @@ CREATE TABLE IF NOT EXISTS games (
 );"
 ```
 
-###Sample Data
+### Sample Data
 -   Populate the database with initial game data:
 ```bash
 sudo -u postgres psql -d quest_complete -c "
@@ -300,13 +115,13 @@ INSERT INTO games (
 );"
 ```
 
-###Running the Application
+### Running the Application
 - Once the database is set up, you can run the application:
 ```bash
  dune exec quest_complete --watch
 ```
 
-###Verifying the Setup
+### Verifying the Setup
 You can check if your database has been correctly populated:
 ```bash
 sudo -u postgres psql -d quest_complete -c "SELECT id, title FROM games;"
