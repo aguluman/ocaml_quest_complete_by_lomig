@@ -121,13 +121,13 @@ INSERT INTO games (
 ```
 
 ### Running the Application
-- Once the database is set up, you can run the application:
+-  Once the database is set up, you can run the application:
 ```bash
  dune exec quest_complete --watch
 ```
 
 ### Verifying the Setup
-You can check if your database has been correctly populated:
+-  You can check if your database has been correctly populated:
 ```bash
 sudo -u postgres psql -d quest_complete -c "SELECT id, title FROM games;"
 ```
