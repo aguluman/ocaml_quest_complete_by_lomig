@@ -1,4 +1,4 @@
-(lang dune 3.17)
+(lang dune 3.18)
 
 (name quest_complete)
 
@@ -12,7 +12,6 @@
 (maintainers "aguluman <chukwumaakunyili@gmail.com>")
 
 (license MIT)
-
 
 (package
  (name quest_complete)
